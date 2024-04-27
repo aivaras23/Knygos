@@ -16,14 +16,15 @@
             </div>
             <div class="mt-3">
                 <label class="form-label h4" for="bookReleaseDate">Isleidimo metai:</label>
-                <input class="form-control" id="bookReleaseDate" type="text" [(ngModel)]="bookReleaseDate">
+                <input class="form-control" id="bookReleaseDate" type="number" [(ngModel)]="bookReleaseDate">
                 <span class="text-danger h5">{{errorBookRelease}} </span>
             </div>
             <button class="btn btn-success w-50 align-self-center mt-3" (click)="addBook()">Prideti</button>
         </div>
     </div>
 </div>
-<div class="container col-md-6">
+<!--
+    <div class="container col-md-6">
     <div *ngFor="let book of fullBookInfo">
         <h5>{{ book.id }}.</h5>
         <h5>Pavadinimas: {{ book.name}}</h5>
@@ -32,3 +33,4 @@
         <button (click)="deleteBook(book)" class="d-flex align-items-center btn btn-danger mt-1" style="max-height: 30px;">Istrinti</button>
     </div>
 </div>
+-->
