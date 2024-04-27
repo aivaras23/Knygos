@@ -1,0 +1,26 @@
+<div class="container col-md-6 mt-2">
+    <div class="card">
+        <div class="card-header h2">
+            Knygu sarasas:
+        </div>
+        <table class="table text-center">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Pavadinimas</th>
+                <th scope="col">Autorius</th>
+                <th scope="col">Isleidimo metai</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of fullBookInfo">
+                    <th>{{ book.id }}</th>
+                    <td>{{ book.name}}</td>
+                    <td>{{ book.author}}</td>
+                    <td>{{ book.releaseDate }}</td>
+                    <button (click)="deleteBook(book)" class="d-flex align-items-center btn btn-danger mt-1" style="max-height: 30px;">Istrinti</button>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
