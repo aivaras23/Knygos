@@ -1,19 +1,19 @@
 <div class="container col-md-6 mt-2">
     <div class="card">
         <div class="card-header h2">
-            Knygu sarasas:
+            Knygu sąrašas:
         </div>
 
         <table class="table text-center">
-            <thead>
-                <th scope="col">#</th>
-                <th scope="col">Pavadinimas</th>
-                <th scope="col">Autorius</th>
-                <th scope="col">Isleidimo metai</th>
+            <thead class="border-bottom">
+                <th class="h5" scope="col">#</th>
+                <th class="h5" scope="col">Pavadinimas</th>
+                <th class="h5" scope="col">Autorius</th>
+                <th class="h5" scope="col">Išleidimo metai</th>
             </thead>
             <tbody>
                 <tr *ngFor="let book of fullBookInfo; let i = index">
-                    <th>{{ i + 1 }}</th>
+                    <th scope="row" class="h5">{{ i + 1 }}</th>
 
                     <td>
                         <span *ngIf="!book.editMode">{{ book.name}}</span>
@@ -30,13 +30,13 @@
                         <input *ngIf="book.editMode" class="form-control" type="number" [(ngModel)]="book.releaseDate">
                     </td>
                     <td>
-                        <div *ngIf="!book.editMode" class="d-flex gap-2">
+                        <div *ngIf="!book.editMode" class="d-flex gap-2 float-end">
                             <button (click)="book.editMode = true" class="btn btn-primary">Redaguoti</button>
-                            <button (click)="deleteBook(book)" class="btn btn-danger ml-2">Istrinti</button>
+                            <button (click)="deleteBook(book)" class="btn btn-danger ml-2">Ištrinti</button>
                         </div>
-                        <div *ngIf="book.editMode" class="d-flex gap-2">
-                            <button (click)="updateBook(book)" class="btn btn-success">Issaugoti</button>
-                            <button (click)="book.editMode = false" class="btn btn-secondary ml-2">Atsaukti</button>
+                        <div *ngIf="book.editMode" class="d-flex gap-2 float-end">
+                            <button (click)="updateBook(book)" class="btn btn-success">Išsaugoti</button>
+                            <button (click)="book.editMode = false" class="btn btn-secondary ml-2">Atšaukti</button>
                         </div>
                     </td>
 

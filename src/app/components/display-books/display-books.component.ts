@@ -30,7 +30,7 @@ export class DisplayBooksComponent {
       localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo))
     }
 
-    public updateBook(book: Book){
+  public updateBook(book: Book){
       book.editMode = false;
       localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo));
     }

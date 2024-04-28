@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Book } from '../../models/book';
 import { CommonModule } from '@angular/common';
+import { BooksService } from '../../services/books.service';
 @Component({
   selector: 'app-add-book',
   standalone: true,
@@ -22,6 +23,9 @@ export class AddBookComponent {
     public errorBookRelease:string|null = null;
 
     public editMode: boolean = false;
+
+
+    constructor(private bookService: BooksService) {}
 
 
     ngOnInit() {
@@ -69,16 +73,6 @@ export class AddBookComponent {
       }
     }
 
-    public deleteBook(book: Book ) {
-      const index = this.fullBookInfo.indexOf(book);
-      this.fullBookInfo.splice(index,1);
-      localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo))
-    }
 
- 
-    public updateBook(book: Book){
-      book.editMode = false;
-      localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo));
-    }
 
 }
