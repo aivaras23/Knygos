@@ -29,7 +29,7 @@ export class AddBookComponent {
       if(savedBooks != null) {
         this.fullBookInfo = JSON.parse(savedBooks);
         this.fullBookInfo.forEach(book => book.editMode = false); // Inicijuoti kiekvienai knygai editMode
-        this.bookId = this.fullBookInfo.length + 1;
+        // this.bookId = this.fullBookInfo.length + 1;
       }
     }
 
@@ -47,7 +47,7 @@ export class AddBookComponent {
 
       if(this.bookName != null && this.bookAuthor != null && this.bookReleaseDate != null){
         const newBook: Book = {
-        id: this.bookId,
+        // id: this.bookId,
         name: this.bookName,
         author: this.bookAuthor,
         releaseDate: this.bookReleaseDate,
@@ -57,7 +57,7 @@ export class AddBookComponent {
 
         localStorage.setItem('bookList',JSON.stringify(this.fullBookInfo));
 
-        this.bookId++;
+        // this.bookId++;
 
         this.bookName = '';
         this.bookAuthor = '';
