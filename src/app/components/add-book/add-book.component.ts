@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Book } from '../../models/book';
 import { CommonModule } from '@angular/common';
 import { BooksService } from '../../services/books.service';
+
 @Component({
   selector: 'app-add-book',
   standalone: true,
@@ -61,6 +62,14 @@ export class AddBookComponent {
 
         localStorage.setItem('bookList',JSON.stringify(this.fullBookInfo));
 
+
+        // idėti duomenys į duomenų bazė
+        this.bookService.getBooks(newBook).subscribe(()=> {
+            this.bookName = '';
+            this.bookAuthor = '';
+            this.bookReleaseDate = '';
+        })
+
         // this.bookId++;
 
         this.bookName = '';
@@ -72,7 +81,5 @@ export class AddBookComponent {
         this.errorBookRelease = null;
       }
     }
-
-
 
 }
