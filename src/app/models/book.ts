@@ -3,4 +3,5 @@ export interface Book {
   name: string;
   author: string;
   releaseDate: string;
+  editMode: boolean;
 }

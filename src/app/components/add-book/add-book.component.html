@@ -23,13 +23,32 @@
         </div>
     </div>
 </div>
+
 <!--
     <div class="container col-md-6">
     <div *ngFor="let book of fullBookInfo">
         <h5>{{ book.id }}.</h5>
-        <h5>Pavadinimas: {{ book.name}}</h5>
-        <h5>Autorius: {{ book.author}} </h5>
-        <h5>Isleidimo metai: {{ book.releaseDate }}</h5>
+        <div (click)="book.editMode = true">
+            <h5>Pavadinimas:
+                <span *ngIf="!book.editMode">{{book.name}}</span>
+                <input *ngIf="book.editMode" class="form-control" type="text" [(ngModel)]="book.name">
+            </h5>
+        </div>
+        <div (click)="book.editMode = true">
+            <h5>Autorius:
+                <span *ngIf="!book.editMode">{{book.author}}</span>
+                <input *ngIf="book.editMode" class="form-control" type="text" [(ngModel)]="book.author">
+            </h5>
+        </div>
+        <div (click)="book.editMode = true">
+            <h5>Isleidimo metai:
+                <span *ngIf="!book.editMode">{{book.releaseDate}}</span>
+                <input *ngIf="book.editMode" class="form-control" type="text" [(ngModel)]="book.releaseDate">
+            </h5>
+        </div>
+        <div *ngIf="book.editMode">
+            <button (click)="updateBook(book)" class="btn btn-primary">Issaugoti</button>
+        </div>
         <button (click)="deleteBook(book)" class="d-flex align-items-center btn btn-danger mt-1" style="max-height: 30px;">Istrinti</button>
     </div>
 </div>

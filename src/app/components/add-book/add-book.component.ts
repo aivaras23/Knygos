@@ -21,12 +21,14 @@ export class AddBookComponent {
     public errorAuthorName:string|null = null;
     public errorBookRelease:string|null = null;
 
+    public editMode: boolean = false;
+
 
     ngOnInit() {
       const savedBooks = localStorage.getItem('bookList');
       if(savedBooks != null) {
         this.fullBookInfo = JSON.parse(savedBooks);
-
+        this.fullBookInfo.forEach(book => book.editMode = false); // Inicijuoti kiekvienai knygai editMode
         this.bookId = this.fullBookInfo.length + 1;
       }
     }
@@ -48,7 +50,8 @@ export class AddBookComponent {
         id: this.bookId,
         name: this.bookName,
         author: this.bookAuthor,
-        releaseDate: this.bookReleaseDate
+        releaseDate: this.bookReleaseDate,
+        editMode: this.editMode
       }
         this.fullBookInfo.push(newBook);
 
@@ -72,8 +75,10 @@ export class AddBookComponent {
       localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo))
     }
 
-    public updateBook() {
-      
+ 
+    public updateBook(book: Book){
+      book.editMode = false;
+      localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo));
     }
 
 }

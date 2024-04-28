@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Book } from '../../models/book';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-display-books',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './display-books.component.html',
   styleUrl: './display-books.component.css'
 })
@@ -28,4 +29,10 @@ export class DisplayBooksComponent {
       this.fullBookInfo.splice(index,1);
       localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo))
     }
+
+    public updateBook(book: Book){
+      book.editMode = false;
+      localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo));
+    }
+
 }
