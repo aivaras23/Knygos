@@ -58,9 +58,9 @@ export class AddBookComponent {
         releaseDate: this.bookReleaseDate,
         editMode: this.editMode
       }
-        this.fullBookInfo.push(newBook);
+        //this.fullBookInfo.push(newBook);
 
-        localStorage.setItem('bookList',JSON.stringify(this.fullBookInfo));
+        // localStorage.setItem('bookList',JSON.stringify(this.fullBookInfo));
 
 
         // idėti duomenys į duomenų bazė
