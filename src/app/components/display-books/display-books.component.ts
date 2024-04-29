@@ -32,20 +32,29 @@ export class DisplayBooksComponent implements OnInit {
       // Duomenų gavimas iš firebase
       this.booksService.retrieveBooks().subscribe (
       (books) => {
-        this.fullBookInfo = Object.values(books);
+        // this.fullBookInfo = Object.values(books);
+
+        for(let x in books){
+          this.fullBookInfo.push({...books[x], id:x});
+        }
         console.log(this.fullBookInfo);
         
       }
     )
   }
 
-  public deleteBook(book: Book ) {
-    
-     const index = this.fullBookInfo.indexOf(book);
-      this.fullBookInfo.splice(index,1);
-      localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo))
-   
+  public deleteBook(id:string|null) {
+    console.log(id);
+      if(id!=null){
+        this.booksService.deleteBook(id).subscribe(()=> {
+          // this.loadBooks();
+        })
+      }
+
     }
+
+   
+    
 
   public updateBook(book: Book){
       book.editMode = false;
@@ -53,3 +62,10 @@ export class DisplayBooksComponent implements OnInit {
     }
 
 }
+
+
+/*
+     const index = this.fullBookInfo.indexOf(book);
+      this.fullBookInfo.splice(index,1);
+      localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo))
+      */

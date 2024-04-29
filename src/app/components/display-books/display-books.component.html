@@ -34,7 +34,7 @@
                     <td>
                         <div *ngIf="!book.editMode" class="d-flex gap-2 float-end">
                             <button (click)="book.editMode = true" class="btn btn-primary">Redaguoti</button>
-                            <button (click)="deleteBook(book)" class="btn btn-danger ml-2">Ištrinti</button>
+                            <button (click)="deleteBook(book.id)" class="btn btn-danger ml-2">Ištrinti</button>
                         </div>
                         <div *ngIf="book.editMode" class="d-flex gap-2 float-end">
                             <button (click)="updateBook(book)" class="btn btn-success">Išsaugoti</button>

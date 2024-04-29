@@ -23,8 +23,8 @@ export class BooksService {
     return this.http.get<{[key:string]:Book}>(this.URL);
   } 
 
-  public deleteBook(book: Book) {
-
+  public deleteBook(id:string) {
+    return this.http.delete('https://recipedb-fc213-default-rtdb.europe-west1.firebasedatabase.app/books/' + id + '.json');
   }
 
   public updateBook() {

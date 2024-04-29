@@ -15,7 +15,7 @@ export class AddBookComponent {
     public bookName: string|null = null;
     public bookAuthor: string|null = null;
     public bookReleaseDate: string|null = null;
-    public bookId: number = 1;
+   
 
     public fullBookInfo: Book[] = []; 
 
@@ -52,7 +52,7 @@ export class AddBookComponent {
 
       if(this.bookName != null && this.bookAuthor != null && this.bookReleaseDate != null){
         const newBook: Book = {
-        // id: this.bookId,
+        id: null,
         name: this.bookName,
         author: this.bookAuthor,
         releaseDate: this.bookReleaseDate,
