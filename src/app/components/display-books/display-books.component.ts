@@ -43,6 +43,7 @@ export class DisplayBooksComponent implements OnInit {
     )
   }
 
+  // knygos ištrinimas pagal ID
   public deleteBook(id:string|null) {
     console.log(id);
       if(id!=null){
@@ -53,12 +54,11 @@ export class DisplayBooksComponent implements OnInit {
 
     }
 
-   
-    
-
+    // knygos atnaujimas 
   public updateBook(book: Book){
-      book.editMode = false;
-      localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo));
+      this.booksService.updateBook(book).subscribe(()=> {
+        book.editMode = false;
+      })
     }
 
 }
@@ -68,4 +68,10 @@ export class DisplayBooksComponent implements OnInit {
      const index = this.fullBookInfo.indexOf(book);
       this.fullBookInfo.splice(index,1);
       localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo))
+      */
+
+
+      /*
+            book.editMode = false;
+      localStorage.setItem('bookList', JSON.stringify(this.fullBookInfo));
       */

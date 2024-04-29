@@ -27,7 +27,7 @@ export class BooksService {
     return this.http.delete('https://recipedb-fc213-default-rtdb.europe-west1.firebasedatabase.app/books/' + id + '.json');
   }
 
-  public updateBook() {
-    
+  public updateBook(book: Book) {
+    return this.http.patch('https://recipedb-fc213-default-rtdb.europe-west1.firebasedatabase.app/books/' + book.id + '.json', book);
   }
 }
