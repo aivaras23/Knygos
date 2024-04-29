@@ -48,7 +48,7 @@ export class DisplayBooksComponent implements OnInit {
     console.log(id);
       if(id!=null){
         this.booksService.deleteBook(id).subscribe(()=> {
-          // this.loadBooks();
+            this.fullBookInfo = this.fullBookInfo.filter(book => book.id !== id) // panaudojamas filteris, kad ištrinant knyga atsinaujintu sąrašas
         })
       }
 

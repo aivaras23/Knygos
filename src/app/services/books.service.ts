@@ -13,21 +13,22 @@ export class BooksService {
   constructor(private http:HttpClient) { }
 
 
-  private URL = 'https://recipedb-fc213-default-rtdb.europe-west1.firebasedatabase.app/books.json'
+  private URL = 'https://recipedb-fc213-default-rtdb.europe-west1.firebasedatabase.app/books'
 
   public getBooks(book: Book): Observable<any> {
-      return this.http.post(this.URL, book)
+      return this.http.post(`${this.URL}.json`, book)
   }
 
   public retrieveBooks(): Observable<any> {
-    return this.http.get<{[key:string]:Book}>(this.URL);
+    return this.http.get<{[key:string]:Book}>(`${this.URL}.json`);
   } 
 
-  public deleteBook(id:string) {
-    return this.http.delete('https://recipedb-fc213-default-rtdb.europe-west1.firebasedatabase.app/books/' + id + '.json');
+  public deleteBook(id:string) { 
+    return this.http.delete(`${this.URL}/${id}.json`);
   }
 
   public updateBook(book: Book) {
-    return this.http.patch('https://recipedb-fc213-default-rtdb.europe-west1.firebasedatabase.app/books/' + book.id + '.json', book);
+    book.editMode = false;
+    return this.http.patch(`${this.URL}/${book.id}.json`, book);
   }
 }
