@@ -4,5 +4,6 @@ import { AddBookComponent } from './components/add-book/add-book.component';
 
 export const routes: Routes = [
     {path:'addbook',component:AddBookComponent},
-    {path:'displaybooks',component:DisplayBooksComponent}
+    {path:'displaybooks',component:DisplayBooksComponent},
+    {path:'',component:AddBookComponent} // uzkrauti defaultini componenta
 ];
