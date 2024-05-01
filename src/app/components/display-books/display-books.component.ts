@@ -3,16 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from '../../models/book';
 import { FormsModule } from '@angular/forms';
 import { BooksService } from '../../services/books.service';
+import { LoadingComponent } from '../loading/loading.component';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-display-books',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LoadingComponent],
   templateUrl: './display-books.component.html',
   styleUrl: './display-books.component.css'
 })
 export class DisplayBooksComponent implements OnInit {
-  fullBookInfo: Book[] = [];
+  public fullBookInfo: Book[] = [];
+  public isLoading = false;
 
   constructor(private booksService: BooksService){}
 
@@ -21,7 +24,7 @@ export class DisplayBooksComponent implements OnInit {
   }
 
   loadBooks(){
-    
+    this.isLoading = true;
     /* localStorage
     const savedBooks = localStorage.getItem('bookList');
     if(savedBooks != null) {
@@ -30,15 +33,17 @@ export class DisplayBooksComponent implements OnInit {
     */
    
       // Duomenų gavimas iš firebase
-      this.booksService.retrieveBooks().subscribe (
+      this.booksService.retrieveBooks().pipe(
+        delay(400)
+      ).subscribe (
       (books) => {
         // this.fullBookInfo = Object.values(books);
 
         for(let x in books){
           this.fullBookInfo.push({...books[x], id:x});
         }
-        console.log(this.fullBookInfo);
-        
+        console.log(this.fullBookInfo)
+        this.isLoading = false;
       }
     )
   }
