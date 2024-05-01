@@ -15,7 +15,7 @@ import { delay } from 'rxjs';
 })
 export class DisplayBooksComponent implements OnInit {
   public fullBookInfo: Book[] = [];
-  public isLoading = false;
+  public isLoading: boolean = false;
 
   constructor(private booksService: BooksService){}
 
@@ -34,7 +34,7 @@ export class DisplayBooksComponent implements OnInit {
    
       // Duomenų gavimas iš firebase
       this.booksService.retrieveBooks().pipe(
-        delay(400)
+        delay(300)
       ).subscribe (
       (books) => {
         // this.fullBookInfo = Object.values(books);
@@ -61,8 +61,13 @@ export class DisplayBooksComponent implements OnInit {
 
     // knygos atnaujimas 
   public updateBook(book: Book){
-      this.booksService.updateBook(book).subscribe(()=> {
+      this.isLoading = true;
+      this.booksService.updateBook(book).pipe(
+        delay(300)
+      )
+      .subscribe(()=> {
         book.editMode = false;
+            this.isLoading = false;
       })
     }
 

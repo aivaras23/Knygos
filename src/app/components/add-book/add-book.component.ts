@@ -3,11 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { Book } from '../../models/book';
 import { CommonModule } from '@angular/common';
 import { BooksService } from '../../services/books.service';
+import { LoadingComponent } from '../loading/loading.component';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-add-book',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule, LoadingComponent],
   templateUrl: './add-book.component.html',
   styleUrl: './add-book.component.css'
 })
@@ -24,6 +26,8 @@ export class AddBookComponent {
     public errorBookRelease:string|null = null;
 
     public editMode: boolean = false;
+
+    public isLoading: boolean = false;
 
 
     constructor(private bookService: BooksService) {}
@@ -64,10 +68,15 @@ export class AddBookComponent {
 
 
         // idėti duomenys į duomenų bazė
-        this.bookService.getBooks(newBook).subscribe(()=> {
+        this.isLoading = true;
+        this.bookService.getBooks(newBook).pipe(
+          delay(300)
+        )
+        .subscribe(()=> {
             this.bookName = '';
             this.bookAuthor = '';
             this.bookReleaseDate = '';
+            this.isLoading = false;
         })
 
         // this.bookId++;
