@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { BooksService } from '../../services/books.service';
 import { LoadingComponent } from '../loading/loading.component';
 import { delay } from 'rxjs';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-add-book',
   standalone: true,
-  imports: [FormsModule,CommonModule, LoadingComponent],
+  imports: [FormsModule,CommonModule, LoadingComponent, FooterComponent],
   templateUrl: './add-book.component.html',
   styleUrl: './add-book.component.css'
 })
@@ -70,7 +71,7 @@ export class AddBookComponent {
         // idėti duomenys į duomenų bazė
         this.isLoading = true;
         this.bookService.getBooks(newBook).pipe(
-          delay(300)
+          delay(200)
         )
         .subscribe(()=> {
             this.bookName = '';

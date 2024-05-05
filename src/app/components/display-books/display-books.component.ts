@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { BooksService } from '../../services/books.service';
 import { LoadingComponent } from '../loading/loading.component';
 import { delay } from 'rxjs';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-display-books',
   standalone: true,
-  imports: [CommonModule, FormsModule, LoadingComponent],
+  imports: [CommonModule, FormsModule, LoadingComponent, FooterComponent],
   templateUrl: './display-books.component.html',
   styleUrl: './display-books.component.css'
 })
@@ -34,11 +35,10 @@ export class DisplayBooksComponent implements OnInit {
    
       // Duomenų gavimas iš firebase
       this.booksService.retrieveBooks().pipe(
-        delay(300)
+        delay(200)
       ).subscribe (
       (books) => {
         // this.fullBookInfo = Object.values(books);
-
         for(let x in books){
           this.fullBookInfo.push({...books[x], id:x});
         }
@@ -62,12 +62,13 @@ export class DisplayBooksComponent implements OnInit {
     // knygos atnaujimas 
   public updateBook(book: Book){
       this.isLoading = true;
+      // panaudojimas pipe ir delay, jog butu 0.2s sąrašo krovimas
       this.booksService.updateBook(book).pipe(
-        delay(300)
+        delay(200)
       )
       .subscribe(()=> {
         book.editMode = false;
-            this.isLoading = false;
+        this.isLoading = false;
       })
     }
 
