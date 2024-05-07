@@ -10,19 +10,20 @@ import { BooksService } from '../../services/books.service';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
-    public bookCount: number = 0;
+    public bookCount: number = 0; 
 
-    constructor(private booksService: BooksService){}
+    constructor(private booksService: BooksService){} // iterpiamas bookService komponentas 
     
   ngOnInit() {
-    this.loadBooks();
+    this.loadBooks(); // iskviesti metoda su ngOnInit, kai loadBooks komponentas bus inicijuotas
   }
 
   loadBooks(){
+    // iskvieciamas service ir jo metodas
     this.booksService.retrieveBooks().subscribe(
       (bookCount: number) => {
         this.bookCount = Object.values(bookCount).length;
-        this.loadBooks();
+        this.loadBooks(); // iskviesti metoda, kad atsinaujintu sarasas(po istrinimo arba pridejimo)
       }
     )
   }

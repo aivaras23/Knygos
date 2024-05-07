@@ -31,10 +31,11 @@ export class AddBookComponent {
     public isLoading: boolean = false;
 
 
-    constructor(private bookService: BooksService) {}
+    constructor(private bookService: BooksService) {} // iterpiamas bookService komponentas 
 
 
-    ngOnInit() {
+  /*
+      ngOnInit() {
       const savedBooks = localStorage.getItem('bookList');
       if(savedBooks != null) {
         this.fullBookInfo = JSON.parse(savedBooks);
@@ -42,9 +43,10 @@ export class AddBookComponent {
         // this.bookId = this.fullBookInfo.length + 1;
       }
     }
+    */
 
-    public addBook() {
-
+    // metodas sukurti nauja knyga
+    public newBook() {
         if(this.bookName === null) {
           this.errorBookName = 'Klaida: neįvestas pavadinimas'
         }
@@ -57,6 +59,7 @@ export class AddBookComponent {
 
       if(this.bookName != null && this.bookAuthor != null && this.bookReleaseDate != null){
         const newBook: Book = {
+        // duomenu priskirimas pagal book.ts interfeiso struktura
         id: null,
         name: this.bookName,
         author: this.bookAuthor,
@@ -67,24 +70,20 @@ export class AddBookComponent {
 
         // localStorage.setItem('bookList',JSON.stringify(this.fullBookInfo));
 
-
-        // idėti duomenys į duomenų bazė
-        this.isLoading = true;
-        this.bookService.getBooks(newBook).pipe(
+        this.isLoading = true; // prasideda krovimas
+        // iskviesti bookService komponenta idėti duomenys i duomenu baze
+        this.bookService.addBook(newBook).pipe(
           delay(200)
         )
         .subscribe(()=> {
+          // po issiuntimo, is naujo nustatyti laukelius kaip tuscius.
             this.bookName = '';
             this.bookAuthor = '';
             this.bookReleaseDate = '';
-            this.isLoading = false;
+            this.isLoading = false; // baigiasi krovimas
         })
 
         // this.bookId++;
-
-        this.bookName = '';
-        this.bookAuthor = '';
-        this.bookReleaseDate = '';
 
         this.errorBookName = null;
         this.errorAuthorName = null;

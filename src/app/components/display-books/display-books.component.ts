@@ -18,14 +18,16 @@ export class DisplayBooksComponent implements OnInit {
   public fullBookInfo: Book[] = [];
   public isLoading: boolean = false;
 
-  constructor(private booksService: BooksService){}
+  constructor(private booksService: BooksService){} // iterpiamas bookService komponentas 
 
-  ngOnInit() {
+  ngOnInit() { // panaudojamas ngOnInit kai puslapis pasikrauna ir iskvieciamas loadBooks metodas
     this.loadBooks();
   }
 
+
+  // metodas uzkrauti knygas is duomenu bazes
   loadBooks(){
-    this.isLoading = true;
+    this.isLoading = true; // krovimas prasideda cia 
     /* localStorage
     const savedBooks = localStorage.getItem('bookList');
     if(savedBooks != null) {
@@ -33,39 +35,37 @@ export class DisplayBooksComponent implements OnInit {
     }
     */
    
-      // Duomenų gavimas iš firebase
       this.booksService.retrieveBooks().pipe(
         delay(200)
       ).subscribe (
       (books) => {
         // this.fullBookInfo = Object.values(books);
-        for(let x in books){
-          this.fullBookInfo.push({...books[x], id:x});
+        for(let x in books){ // ciklas, kad paiimti visa informacija is knygu array
+          this.fullBookInfo.push({...books[x], id:x}); // ideti visas knygu array'us i fullBookInfo array, bei ju kiekvieno id
         }
         console.log(this.fullBookInfo)
-        this.isLoading = false;
+        this.isLoading = false; // krovimas baigiasi
       }
     )
   }
 
-  // knygos ištrinimas pagal ID
+  // metodas istringi knyga pagal id is duombazes
   public deleteBook(id:string|null) {
     console.log(id);
-      if(id!=null){
+      if(id!=null){ // patikirnimas ar id nera tuscias
         this.booksService.deleteBook(id).subscribe(()=> {
             this.fullBookInfo = this.fullBookInfo.filter(book => book.id !== id) // panaudojamas filteris, kad ištrinant knyga atsinaujintu sąrašas
         })
       }
-
     }
 
-    // knygos atnaujimas 
+  // knygos atnaujimo metodas
   public updateBook(book: Book){
-      this.isLoading = true;
-      // panaudojimas pipe ir delay, jog butu 0.2s sąrašo krovimas
+      this.isLoading = true; // krovimas prasideda
       this.booksService.updateBook(book).pipe(
         delay(200)
       )
+      // kai atsinaujina informacija, isjungiami editMode ir isLoading parametrai
       .subscribe(()=> {
         book.editMode = false;
         this.isLoading = false;
